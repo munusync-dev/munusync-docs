@@ -1,4 +1,3 @@
-```mermaid
 erDiagram
     USER {
         string username
@@ -9,21 +8,31 @@ erDiagram
         enum roles
     }
 
-    ROLES {
-        recruiter
-        admin
-        user
-    }
-
     COMPANY {
         string name
         string industry
         string description
+        string banner_url
+        string tagline
+        string about
+        int founded_year
+        string specialties
+        string culture_text
+        bool verified
+        int followers_count
+        string locations
+        string company_size_range
+        string industry_code
         datetime created_at
         datetime updated_at
     }
 
+    COMPANY_TYPE {
+        string type
+    }
+
+    COMPANY }o--|| COMPANY_TYPE : "has type"
+    }
+
     USER ||--o{ COMPANY : "creates"
     USER }o--o{ COMPANY : "joins"
-
-```
