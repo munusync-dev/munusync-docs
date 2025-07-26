@@ -1,0 +1,186 @@
+Table User {
+  id varchar [pk]
+  username varchar
+  email varchar
+  password varchar
+  createdAt datetime
+  updatedAt datetime
+  role varchar
+}
+
+Table Profile {
+  firstName varchar
+  userId uuid [ref: >User.id]
+  lastName varchar
+  profilePicture varchar
+}
+
+Table Candidate {
+  id uuid [pk]
+  userId uuid [ref: > User.id]
+  resumeUrl varchar
+  bio varchar
+  socialLinks varchar
+}
+
+Table Experience {
+  id uuid [pk]
+  candidateId uuid [ref: > Candidate.id]
+  title varchar
+  company varchar
+  startDate datetime
+  endDate datetime
+  description varchar
+}
+
+Table Education {
+  id uuid [pk]
+  candidateId uuid [ref: > Candidate.id]
+  school varchar
+  degree varchar
+  fieldOfStudy varchar
+  startDate datetime
+  endDate datetime
+  description varchar
+}
+
+Table Skill {
+  id uuid [pk]
+  name varchar
+}
+
+Table UserSkill {
+  id uuid [pk]
+  userId uuid [ref: > User.id]
+  skillId uuid [ref: > Skill.id]
+}
+
+Table JobSkill {
+  id uuid [pk]
+  jobId uuid [ref: > Job.id]
+  skillId uuid [ref: > Skill.id]
+}
+
+Table Company {
+  id uuid [pk]
+  name varchar
+  industryId uuid [ref: > Industry.id]
+  description varchar
+  profilePictureUrl varchar
+  bannerUrl varchar
+  foundedYear int
+  verified boolean
+  companySize varchar
+  createdAt datetime
+  updatedAt datetime
+}
+
+Table Industry {
+  id uuid [pk]
+  name varchar
+  code varchar
+}
+
+Table Address {
+  id uuid [pk]
+  addressLine1 varchar
+  addressLine2 varchar
+  city varchar
+  state varchar
+  postalCode varchar
+  countryId uuid [ref: > Country.id]
+  latitude varchar
+  longitude varchar
+}
+
+Table Country {
+  id uuid [pk]
+  name varchar
+  code varchar
+}
+
+Table Office {
+  id uuid [pk]
+  companyId uuid [ref: > Company.id]
+  addressId uuid [ref: > Address.id]
+  name varchar
+  phone varchar
+  email varchar
+  timezone varchar
+  createdAt datetime
+  updatedAt datetime
+}
+
+Table Socials {
+  id uuid [pk]
+  entityType varchar
+  entityId uuid
+  platform varchar
+  link varchar
+}
+
+Table Job {
+  id uuid [pk]
+  officeId uuid [ref: > Office.id]
+  userId uuid [ref: > User.id]
+  title varchar
+  description varchar
+  employmentType varchar
+  workType varchar
+  salaryMin int
+  salaryMax int
+  requirements varchar
+  responsibilities varchar
+  benefits varchar
+  postedAt datetime
+  updatedAt datetime
+}
+
+Table Application {
+  id uuid [pk]
+  jobId uuid [ref: > Job.id]
+  userId uuid [ref: > User.id]
+  fname varchar
+  lname varchar
+  email varchar
+  phone varchar
+  resumeUrl varchar
+  status varchar
+  appliedAt datetime
+  updatedAt datetime
+}
+
+Table JobAnalytics {
+  id uuid [pk]
+  jobId uuid [ref: > Job.id]
+  views int
+  applications int
+  clicks int
+  saves int
+  shares int
+  interviews int
+  offers int
+  hires int
+  updatedAt datetime
+}
+
+Table CompanyAnalytics {
+  id uuid [pk]
+  companyId uuid [ref: > Company.id]
+  views int
+  clicks int
+  saves int
+  shares int
+  followers int
+  totalJobsPosted int
+  totalHires int
+  totalApplications int
+  onboardingSuccessCount int
+  interviewsCount int
+  offersCount int
+  rejectionsCount int
+  timeToHireDays int
+  periodStart datetime
+  periodEnd datetime
+  lastUpdated datetime
+}
