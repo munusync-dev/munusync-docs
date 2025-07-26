@@ -10,6 +10,33 @@ erDiagram
         string role
     }
 
+    CandidateProfile {
+        string id PK
+        string userId FK
+        string resumeUrl
+        string bio
+        string experience
+        string education
+        string socialLinks
+    }
+
+    Skill {
+        string id PK
+        string name
+    }
+
+    UserSkill {
+        string id PK
+        string userId FK
+        string skillId FK
+    }
+
+    JobSkill {
+        string id PK
+        string jobId FK
+        string skillId FK
+    }
+
     Company {
         string id PK
         string name
@@ -140,6 +167,11 @@ erDiagram
     Job     ||--o{ Application : "has applications"
     Job     }o--|| User : "posted by"
 
+    User    ||--o{ CandidateProfile : "has candidate profile"
+    User    ||--o{ UserSkill : "has skills"
+    Job     ||--o{ JobSkill : "requires skills"
+    Skill   ||--o{ UserSkill : "linked to user"
+    Skill   ||--o{ JobSkill : "linked to job"
     User    ||--o{ Company : "creates"
     User    }o--o{ Company : "joins"
 
