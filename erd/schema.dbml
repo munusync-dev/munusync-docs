@@ -131,6 +131,7 @@ Table Job {
   salaryMax int
   requirements varchar
   responsibilities varchar
+  matchRate float
   benefits varchar
   postedAt datetime
   updatedAt datetime
